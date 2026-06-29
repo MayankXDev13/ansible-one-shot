@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MayankXDev Universe</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden;font-family:Inter,Arial,sans-serif;background:#020617;color:#fff}
+canvas{position:fixed;inset:0}
+#aurora{position:fixed;inset:-30%;background:
+radial-gradient(circle at 15% 20%,#00e5ff55,transparent 30%),
+radial-gradient(circle at 80% 15%,#ff00aa55,transparent 35%),
+radial-gradient(circle at 20% 85%,#00ff9955,transparent 35%),
+radial-gradient(circle at 85% 80%,#ffdd0055,transparent 35%);
+filter:blur(90px);animation:spin 25s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.wrap{position:relative;z-index:3;height:100%;display:flex;justify-content:center;align-items:center;padding:20px}
+.card{
+width:min(900px,95vw);
+padding:60px;
+border-radius:28px;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(18px);
+border:1px solid rgba(255,255,255,.25);
+box-shadow:0 0 35px #00e5ff66,0 0 80px #ff00aa33;
+text-align:center;
+animation:float 4s ease-in-out infinite;
+}
+@keyframes float{50%{transform:translateY(-12px)}}
+.badge{display:inline-block;padding:10px 18px;border-radius:99px;background:#111827;color:#67e8f9;border:1px solid #22d3ee}
+h1{
+margin:20px 0;
+font-size:clamp(3rem,8vw,5rem);
+font-weight:900;
+background:linear-gradient(90deg,#ff004c,#ff8a00,#ffe600,#00ff88,#00e5ff,#6a5cff,#ff00d4,#ff004c);
+background-size:300%;
+-webkit-background-clip:text;
+color:transparent;
+animation:rainbow 6s linear infinite}
+@keyframes rainbow{to{background-position:300%}}
+h2{font-size:2rem}
+.name{color:#22d3ee;text-shadow:0 0 15px #22d3ee}
+#typing{margin:20px auto;max-width:700px;font-size:1.2rem;line-height:1.8;color:#dbeafe;min-height:70px}
+button{
+margin-top:20px;padding:18px 36px;border:none;border-radius:50px;
+font-size:1.1rem;font-weight:700;cursor:pointer;
+background:linear-gradient(90deg,#ff0080,#00e5ff,#00ff88,#ffdd00);
+background-size:200%;
+animation:rainbow 4s linear infinite;
+transition:.3s}
+button:hover{transform:scale(1.08)}
+.confetti{position:fixed;width:10px;height:10px;animation:fall 2.6s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(900deg);opacity:0}}
+#cursor{position:fixed;width:18px;height:18px;border-radius:50%;background:#00e5ff;pointer-events:none;box-shadow:0 0 25px #00e5ff}
+.footer{margin-top:30px;color:#cbd5e1}
+</style>
+</head>
+<body>
+<canvas id="space"></canvas>
+<div id="aurora"></div>
+<div id="cursor"></div>
+<div class="wrap">
+<div class="card">
+<div class="badge">🚀 CLOUD • DEVOPS • AWS • KUBERNETES • AI</div>
+<h1>HELLO BHAI!</h1>
+<h2>Welcome <span class="name">MayankXDev Ji 😎</span></h2>
+<p id="typing"></p>
+<button id="enter">ENTER THE DEV ZONE ⚡</button>
+<div class="footer">✨ Build • Deploy • Automate • Innovate ✨</div>
+</div>
+</div>
+<script>
+const c=document.getElementById("space"),ctx=c.getContext("2d");
+function resize(){c.width=innerWidth;c.height=innerHeight}
+resize();addEventListener("resize",resize);
+
+const stars=[...Array(450)].map(()=>({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2,s:Math.random()*0.8+.2}));
+function draw(){
+ctx.clearRect(0,0,c.width,c.height);
+ctx.fillStyle="white";
+for(const s of stars){
+ctx.globalAlpha=.3+Math.random()*.7;
+ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill();
+s.y+=s.s;
+if(s.y>c.height){s.y=0;s.x=Math.random()*c.width;}
+}
+requestAnimationFrame(draw);
+}
+draw();
+
+const msg="💻 Welcome to the MayankXDev Universe! Cloud • DevOps • Kubernetes • AWS • AI • Keep Building Amazing Things.";
+let i=0;
+(function type(){
+typing.textContent=msg.slice(0,i++);
+if(i<=msg.length)setTimeout(type,40);
+})();
+
+const cur=document.getElementById("cursor");
+addEventListener("mousemove",e=>{
+cur.style.left=(e.clientX-9)+"px";
+cur.style.top=(e.clientY-9)+"px";
+});
+
+enter.onclick=()=>{
+for(let i=0;i<250;i++){
+let d=document.createElement("div");
+d.className="confetti";
+d.style.left=Math.random()*100+"vw";
+d.style.top="-10px";
+d.style.background=`hsl(${Math.random()*360},100%,60%)`;
+d.style.transform=`translateX(${(Math.random()-.5)*600}px)`;
+document.body.appendChild(d);
+setTimeout(()=>d.remove(),2600);
+}
+setTimeout(()=>alert("🚀 Welcome, MayankXDev Ji! Happy Coding!"),300);
+};
+</script>
+</body>
+</html>

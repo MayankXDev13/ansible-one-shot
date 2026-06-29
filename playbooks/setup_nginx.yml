@@ -1,0 +1,21 @@
+- name: Setup Nginx with Custom File
+  hosts: servers
+  become: true
+
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+    - name: Copy the Custom HTML File
+      copy:
+        src: /home/mayank/Coding/ansible-one-shot/playbooks/index.html
+        dest: /var/www/html/index.html
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: reloaded
+    - name: Enable Nginx
+      systemd_service:
+        name: nginx
+        enabled: true
