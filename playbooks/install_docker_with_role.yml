@@ -1,0 +1,6 @@
+- name: Install Docker on Ubunt
+  hosts: servers
+  become: true
+  roles:
+    - docker
+  
