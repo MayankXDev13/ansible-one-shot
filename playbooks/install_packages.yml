@@ -21,4 +21,4 @@
       loop: "{{ packages_to_install }}" # loop the list
       debug:
         msg: "Installing {{ item }}" # access the item 
-       when: ansible_facts["distribution"] == "Ubuntu" # condition
+      when: ansible_facts["distribution"] == "Ubuntu" # condition
